@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2019 Stanley Ang
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/gradient_toolbar_background"
+                app:elevation="0dp"
+                android:stateListAnimator="@null"
+                android:fitsSystemWindows="true">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+
+                </com.google.android.material.appbar.MaterialToolbar>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+            </View>
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/linearLayoutTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/loginCard">
+
+
+                <TextView
+                    android:id="@+id/titleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="50sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_gravity="center"
+                    android:fitsSystemWindows="true"
+                    android:text="@string/app_name"
+                    android:layout_marginBottom="20dp"/>
+
+                <Space
+                    android:id="@+id/spacing"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/subTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_gravity="center"
+                    android:fitsSystemWindows="true"
+                    android:text="@string/app_name"/>
+
+            </LinearLayout>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/loginCard"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:cardElevation="20dp"
+                app:cardCornerRadius="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_margin="20dp">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:paddingBottom="20dp"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:boxCornerRadiusTopStart="10dp"
+                    android:hint="Staff ID">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/material_button"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    app:cornerRadius="10dp"
+                    android:background="@drawable/gradient_toolbar_background"
+                    android:text="Log in"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
