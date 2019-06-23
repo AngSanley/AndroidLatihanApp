@@ -17,13 +17,16 @@
 package com.angsanley.testenakaja;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Space;
 import android.widget.TextView;
 
@@ -41,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     LinearLayout linearLayoutTitle;
     Space titleSpacing;
     TextInputEditText staffIdText;
+    ProgressBar loadingProgress;
+    CardView loginCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         linearLayoutTitle = findViewById(R.id.linearLayoutTitle);
         titleSpacing = findViewById(R.id.spacing);
         staffIdText = findViewById(R.id.staffIdTextEdit);
+        loadingProgress = findViewById(R.id.login_progress);
+        loginCard = findViewById(R.id.loginCard);
 
         if (dpHeight < 500) {
             linearLayoutTitle.setOrientation(LinearLayout.HORIZONTAL);
@@ -98,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        String staffId = staffIdText.getText().toString();
+        final String staffId = staffIdText.getText().toString();
 
         if (staffId.isEmpty()) {
             staffIdText.setError("Please fill in");
@@ -106,9 +113,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
-        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-        intent.putExtra("staffId", staffId);
-        startActivity(intent);
-        finish();
+        loadingProgress.setVisibility(View.VISIBLE);
+        staffIdLayout.setVisibility(View.GONE);
+        loginBtn.setVisibility(View.GONE);
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                //TODO your background code
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    intent.putExtra("staffId", staffId);
+                    startActivity(intent);
+                    MainActivity.this.finish();
+                }
+            }
+        });
+
+
+
+        //finish();
     }
 }
