@@ -18,6 +18,7 @@ package com.angsanley.testenakaja;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -28,9 +29,10 @@ import android.widget.TextView;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView titleText, subtitleText;
     MaterialButton loginBtn;
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     MaterialToolbar toolbar;
     LinearLayout linearLayoutTitle;
     Space titleSpacing;
+    TextInputEditText staffIdText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +61,13 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         linearLayoutTitle = findViewById(R.id.linearLayoutTitle);
         titleSpacing = findViewById(R.id.spacing);
+        staffIdText = findViewById(R.id.staffIdTextEdit);
 
         if (dpHeight < 500) {
             linearLayoutTitle.setOrientation(LinearLayout.HORIZONTAL);
             titleSpacing.setVisibility(View.VISIBLE);
 
         }
-
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -79,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
 
         setTitle("Mi Account");
         setSubtitle("Please log in");
+
+        loginBtn.setOnClickListener(this);
     }
 
     @Override
@@ -89,5 +94,21 @@ public class MainActivity extends AppCompatActivity {
 
     public void setSubtitle(CharSequence subtitle) {
         subtitleText.setText(subtitle);
+    }
+
+    @Override
+    public void onClick(View v) {
+        String staffId = staffIdText.getText().toString();
+
+        if (staffId.isEmpty()) {
+            staffIdText.setError("Please fill in");
+            staffIdText.requestFocus();
+            return;
+        }
+
+        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+        intent.putExtra("staffId", staffId);
+        startActivity(intent);
+        finish();
     }
 }
